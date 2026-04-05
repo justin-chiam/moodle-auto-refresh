@@ -10,8 +10,13 @@ async function refreshMoodleTabs() {
     for (const tab of tabs) {
       if (tab.id == null || !tab.url) continue;
 
-      // Do not reload /mod/ pages
-      if (tab.url.startsWith("https://moodle.telt.unsw.edu.au/mod/")) {
+      // Do not reload /mod/lti/ pages
+      if (tab.url.startsWith("https://moodle.telt.unsw.edu.au/mod/lti/")) {
+        continue;
+      }
+
+      // Do not reload /mod/quiz/ pages
+      if (tab.url.startsWith("https://moodle.telt.unsw.edu.au/mod/quiz/")) {
         continue;
       }
 
