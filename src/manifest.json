@@ -20,7 +20,9 @@
     "gecko": {
       "id": "{2e4b1767-c9ba-41d0-90ee-8fe730c80620}",
       "strict_min_version": "140.0",
-      "data_collection_permissions": "none"
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }
