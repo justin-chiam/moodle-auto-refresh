@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Moodle Auto Refresh",
+  "version": "1.0.0",
+  "description": "Automatically refreshes Moodle tabs every 10 minutes.",
+  "homepage_url": "https://github.com/justin-chiam/moodle-auto-refresh",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": ["tabs", "alarms"],
+  "host_permissions": ["https://moodle.telt.unsw.edu.au/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Moodle Auto Refresh"
+  }
+}

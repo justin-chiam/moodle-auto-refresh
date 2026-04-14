@@ -3,7 +3,7 @@ const PERIOD_MINUTES = 10;
 
 async function refreshMoodleTabs() {
   try {
-    const tabs = await browser.tabs.query({
+    const tabs = await chrome.tabs.query({
       url: ["https://moodle.telt.unsw.edu.au/*"]
     });
 
@@ -27,7 +27,7 @@ async function refreshMoodleTabs() {
       if (tab.status === "loading") continue;
 
       // Reload only background Moodle tabs
-      await browser.tabs.reload(tab.id);
+      await chrome.tabs.reload(tab.id);
     }
   } catch (error) {
     console.error("Failed to refresh Moodle tabs:", error);
@@ -35,29 +35,31 @@ async function refreshMoodleTabs() {
 }
 
 function ensureAlarm() {
-  browser.alarms.get(ALARM_NAME).then((existing) => {
+  chrome.alarms.get(ALARM_NAME).then((existing) => {
     if (!existing) {
-      browser.alarms.create(ALARM_NAME, {
+      chrome.alarms.create(ALARM_NAME, {
         periodInMinutes: PERIOD_MINUTES
       });
     }
   });
 }
 
-browser.runtime.onInstalled.addListener(() => {
-  browser.alarms.clear(ALARM_NAME).then(() => {
-    browser.alarms.create(ALARM_NAME, {
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.alarms.clear(ALARM_NAME).then(() => {
+    chrome.alarms.create(ALARM_NAME, {
       periodInMinutes: PERIOD_MINUTES
     });
   });
 });
 
-browser.runtime.onStartup.addListener(() => {
+chrome.runtime.onStartup.addListener(() => {
   ensureAlarm();
 });
 
-browser.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
     refreshMoodleTabs();
   }
 });
+
+ensureAlarm();
