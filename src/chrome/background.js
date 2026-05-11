@@ -1,5 +1,6 @@
-const ALARM_NAME = "refresh-moodle";
+const ALARM_NAME = "keepalive-moodle-session";
 const PERIOD_MINUTES = 10;
+const MOODLE_URL = "https://moodle.telt.unsw.edu.au/*"
 
 async function refreshMoodleTabs() {
   try {
@@ -35,20 +36,18 @@ async function refreshMoodleTabs() {
 }
 
 function ensureAlarm() {
-  chrome.alarms.get(ALARM_NAME).then((existing) => {
-    if (!existing) {
-      chrome.alarms.create(ALARM_NAME, {
-        periodInMinutes: PERIOD_MINUTES
-      });
-    }
-  });
+  const existing = await chrome.alarms.get(ALARM_NAME);
+
+  if (!existing) {
+    await chrome.alarms.create(ALARM_NAME, {
+      periodInMinutes: PERIOD_MINUTES
+    });
+  }
 }
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.alarms.clear(ALARM_NAME).then(() => {
-    chrome.alarms.create(ALARM_NAME, {
-      periodInMinutes: PERIOD_MINUTES
-    });
+  chrome.alarms.create(ALARM_NAME, {
+    periodInMinutes: PERIOD_MINUTES
   });
 });
 
