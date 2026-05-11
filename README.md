@@ -3,6 +3,17 @@ A browser extension that automatically keeps your Moodle session alive to preven
 
 Works on both Firefox and Chrome.
 
+<table>
+    <tr>
+        <td width="50%">
+            <img src="assets/keeps-your-moodle-session-alive-automatically.png" alt="Keeps your Moodle session alive automatically" />
+        </td>
+        <td width="50%">
+            <img src="assets/prevent-seeing-this-page.png" alt="Prevent seeing this page" />
+        </td>
+    </tr>
+</table>
+
 ## Features
 - Keeps your Moodle session active using Moodle's built-in session keepalive request
 - Runs periodically in the background using the alarms API
