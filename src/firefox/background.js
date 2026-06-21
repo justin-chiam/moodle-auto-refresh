@@ -1,5 +1,5 @@
 const ALARM_NAME = "keepalive-moodle-session";
-const PERIOD_MINUTES = 30;
+const PERIOD_MINUTES = 10;
 const MOODLE_URL = "https://moodle.telt.unsw.edu.au/*";
 
 // Ensure alarm exists whenever background script starts
